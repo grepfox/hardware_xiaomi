@@ -14,11 +14,16 @@ namespace ir {
 
 class ConsumerIr : public BnConsumerIr {
   public:
+    ConsumerIr();
     ::ndk::ScopedAStatus getCarrierFreqs(
             ::std::vector<::aidl::android::hardware::ir::ConsumerIrFreqRange>* _aidl_return)
             override;
     ::ndk::ScopedAStatus transmit(int32_t carrierFreqHz,
                                   const ::std::vector<int32_t>& pattern) override;
+
+  private:
+    std::vector<ConsumerIrFreqRange> kRangeVec;
+    bool isInRange(int32_t carrierFreqHz);
 };
 
 }  // namespace ir
